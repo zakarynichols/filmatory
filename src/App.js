@@ -4,7 +4,7 @@ import Child from './components/Child';
 import Home from './components/Home';
 
 import {
-  BrowserRouter as HashRouter,
+  HashRouter,
   Switch,
   Route,
   NavLink
@@ -24,7 +24,7 @@ const App = () => {
             <Home />
             <GetMovies />
           </Route>
-          <Route exact path="/movie/:id" children={<Child />} />
+          <Route path="/:id" children={<Child />} />
         </Switch>
       </div>
     </HashRouter>

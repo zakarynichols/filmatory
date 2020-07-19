@@ -6,19 +6,19 @@ const GetMovies = () => {
     const [query, setQuery] = useState('');
     const [error, setError] = useState('');
 
-    function capitalize(s) {
+    const capitalize = (s) => {
         return (typeof s !== 'string') ? '' : s.charAt(0).toUpperCase() + s.slice(1);
     }
 
-    function handleChange(e) {
+    const handleChange = (e) => {
         setQuery(e.target.value);
     }
 
-    function isEmpty(q) {
+    const isEmpty = (q) => {
         return (q === '') ? setError('You must fill in the fields.') : setError('');
     }
 
-    function handleSubmit(e) {
+    const handleSubmit = (e) => {
         e.preventDefault();
         isEmpty(query);
         fetch(`https://www.omdbapi.com/?s=${query}&apikey=9f56ec01`)
@@ -27,7 +27,7 @@ const GetMovies = () => {
             .catch(error => console.error(error));
     }
 
-    function check() {
+    const check = () => {
         return data.Response === "True" ?
             <div>
                 <h1 className="centered">Total Results : {data.totalResults}</h1>
@@ -39,7 +39,7 @@ const GetMovies = () => {
                                     <div><strong>{movie.Title}</strong></div>
                                     <div>{capitalize(movie.Type)}</div>
                                     <div>{movie.Year}</div>
-                                    <Link className="view-movie-btn" to={`movie/${movie.imdbID}`}>View</Link>
+                                    <Link className="view-movie-btn" to={`${movie.imdbID}`}>View</Link>
                                 </div>
                             </div>
                         )}
