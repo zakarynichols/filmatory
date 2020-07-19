@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/Moovy/static/css/main.7437e101.chunk.css",
-    "main.js": "/Moovy/static/js/main.5af15d4d.chunk.js",
-    "main.js.map": "/Moovy/static/js/main.5af15d4d.chunk.js.map",
+    "main.js": "/Moovy/static/js/main.a778f5df.chunk.js",
+    "main.js.map": "/Moovy/static/js/main.a778f5df.chunk.js.map",
     "runtime-main.js": "/Moovy/static/js/runtime-main.83e308ad.js",
     "runtime-main.js.map": "/Moovy/static/js/runtime-main.83e308ad.js.map",
     "static/js/2.cc2630e0.chunk.js": "/Moovy/static/js/2.cc2630e0.chunk.js",
     "static/js/2.cc2630e0.chunk.js.map": "/Moovy/static/js/2.cc2630e0.chunk.js.map",
     "index.html": "/Moovy/index.html",
-    "precache-manifest.247c0a6bf16a8d1560f4f6d527d12875.js": "/Moovy/precache-manifest.247c0a6bf16a8d1560f4f6d527d12875.js",
+    "precache-manifest.42907b845146c4a722dbd72913910d68.js": "/Moovy/precache-manifest.42907b845146c4a722dbd72913910d68.js",
     "service-worker.js": "/Moovy/service-worker.js",
     "static/css/main.7437e101.chunk.css.map": "/Moovy/static/css/main.7437e101.chunk.css.map",
     "static/js/2.cc2630e0.chunk.js.LICENSE.txt": "/Moovy/static/js/2.cc2630e0.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.83e308ad.js",
     "static/js/2.cc2630e0.chunk.js",
     "static/css/main.7437e101.chunk.css",
-    "static/js/main.5af15d4d.chunk.js"
+    "static/js/main.a778f5df.chunk.js"
   ]
 }
