@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "df50603d8d0dffbb725b220e1a09d17d",
+    "revision": "381a2428a0f277cdbe187f2e2a768a2f",
     "url": "/Moovy/index.html"
   },
   {
-    "revision": "37c1057ade502de175c1",
+    "revision": "f3cc02c1dc7e17148bbb",
     "url": "/Moovy/static/css/main.7437e101.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Moovy/static/js/2.5bf6944c.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "37c1057ade502de175c1",
-    "url": "/Moovy/static/js/main.97be7e54.chunk.js"
+    "revision": "f3cc02c1dc7e17148bbb",
+    "url": "/Moovy/static/js/main.fb44cf4d.chunk.js"
   },
   {
     "revision": "e73d1e5468ed3585d9d1",
