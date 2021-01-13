@@ -1,6 +1,6 @@
 import React from 'react';
 import GetMovies from './components/GetMovies';
-import Child from './components/Child';
+import Movie from './components/Movie/Movie';
 import Home from './components/Home';
 
 import {
@@ -24,7 +24,7 @@ const App = () => {
             <Home />
             <GetMovies />
           </Route>
-          <Route path="/:id" children={<Child />} />
+          <Route path="/:id" children={<Movie />} />
         </Switch>
       </div>
     </HashRouter>

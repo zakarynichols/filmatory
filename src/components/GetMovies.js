@@ -11,32 +11,46 @@ const GetMovies = () => {
         message: ''
     });
 
-    const capitalize = (s) => {
-        return (typeof s !== 'string') ? '' : s.charAt(0).toUpperCase() + s.slice(1);
-    }
+    const capitalize = (str) => {
+        return (typeof str !== 'string') ? '' : str.charAt(0).toUpperCase() + str.slice(1);
+    };
 
     const handleChange = (e) => {
         setQuery(e.target.value);
-    }
+    };
 
-    const isEmpty = (q) => {
-        return (q === '') ? setError({ bool: true, message: 'You must fill in the fields.' }) : setError({ bool: false, message: '' });
-    }
+    const isEmpty = (searchQuery) => {
+        if (searchQuery === '') {
+            setError({ bool: true, message: 'You must fill in the fields.' });
+            return true;
+        } else {
+            setError({ bool: false, message: '' });
+            return false;
+        };
+    };
 
     const handleSubmit = async (e) => {
         setIsLoaded(false);
         e.preventDefault();
-        isEmpty(query);
+        if (isEmpty(query)) return;
         try {
-            const response = await fetch(`https://www.omdbapi.com/?s=${query}&apikey=9f56ec01`)
+            const response = await fetch(`https://www.omdbapi.com/?s=${query}&apikey=${process.env.REACT_APP_OMDB_API_KEY}`)
             if (response.status === 200) {
                 setIsLoaded(true);
                 const toJson = await response.json();
-                console.log(toJson);
-                setData(toJson)
+                if (toJson.Error) {
+                    setError({ bool: true, message: toJson.Error })
+                } else {
+                    setData(toJson)
+                };
+            };
+            if (response.status === 401) {
+                setIsLoaded(true);
+                setError({ bool: true, message: 'You\'re not authenticated.'})
             }
         } catch (error) {
             console.error(error);
+            setIsLoaded(true);
             setError({ bool: true, message: 'Something went wrong!' })
         }
     };
