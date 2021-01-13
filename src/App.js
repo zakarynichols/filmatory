@@ -16,7 +16,7 @@ const App = () => {
       <div>
         <ul className="centered nav-links lists">
           <li>
-            <NavLink activeClassName="selected" exact={true} to="/">Home</NavLink>
+            <NavLink className="selected" exact={true} to="/">Home</NavLink>
           </li>
         </ul>
         <Switch>
