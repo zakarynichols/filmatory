@@ -1,17 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import Spinner from './LoadingSpinner';
 
 const Child = () => {
     const { id } = useParams();
     const [movie, setMovie] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-        fetch(`https://www.omdbapi.com/?i=${id}&apikey=9f56ec01`)
-            .then(response => response.json())
-            .then(movie => setMovie(movie))
-            .catch(error => console.error(error));
-            setLoading(false);
+        const getMovie = async () => {
+            try {
+                const response = await fetch(`https://www.omdbapi.com/?i=${id}&apikey=9f56ec01`);
+                if (response.status === 200) {
+                    const toJson = await response.json();
+                    setMovie(toJson);
+                    setIsLoaded(true);
+                };
+            } catch (error) {
+                console.error(error);
+            };
+        };
+        getMovie();
     }, [id]);
 
     function splitString(stringToSplit, separator) {
@@ -63,7 +72,7 @@ const Child = () => {
 
     return (
         <div>
-            {loading ? <h1 className="centered">Loading...</h1>
+            {isLoaded === false ? <Spinner />
                 : <div className="centered max-movie-width flex-container">
                     <div className="movie-container">
                         <img className="movie-img" src={movie.Poster} alt="movie-poster" />

@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Spinner from './LoadingSpinner';
 
 const GetMovies = () => {
     const [data, setData] = useState([]);
+    const [isLoaded, setIsLoaded] = useState(null);
     const [query, setQuery] = useState('');
-    const [error, setError] = useState('');
+    const [error, setError] = useState({
+        bool: false,
+        message: ''
+    });
 
     const capitalize = (s) => {
         return (typeof s !== 'string') ? '' : s.charAt(0).toUpperCase() + s.slice(1);
@@ -15,24 +20,45 @@ const GetMovies = () => {
     }
 
     const isEmpty = (q) => {
-        return (q === '') ? setError('You must fill in the fields.') : setError('');
+        return (q === '') ? setError({ bool: true, message: 'You must fill in the fields.' }) : setError({ bool: false, message: '' });
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
+        setIsLoaded(false);
         e.preventDefault();
         isEmpty(query);
-        fetch(`https://www.omdbapi.com/?s=${query}&apikey=9f56ec01`)
-            .then(response => response.json())
-            .then(movies => setData(movies))
-            .catch(error => console.error(error));
-    }
+        try {
+            const response = await fetch(`https://www.omdbapi.com/?s=${query}&apikey=9f56ec01`)
+            if (response.status === 200) {
+                setIsLoaded(true);
+                const toJson = await response.json();
+                console.log(toJson);
+                setData(toJson)
+            }
+        } catch (error) {
+            console.error(error);
+            setError({ bool: true, message: 'Something went wrong!' })
+        }
+    };
 
-    const check = () => {
-        return data.Response === "True" ?
-            <div>
-                <h1 className="centered">Total Results : {data.totalResults}</h1>
+    return (
+        <div>
+            <form className="centered">
+                <div className="error">{error.message}</div>
+                <input
+                    className="form-input"
+                    type="text"
+                    placeholder="Search Movies"
+                    value={query}
+                    onChange={handleChange}
+                />
+                <button className="mt" onClick={handleSubmit}>Search</button>
+            </form>
+            {isLoaded === false && error.bool === false ? <Spinner /> :
+                <div>
+                    {isLoaded === true && error.bool === false && <h1 className="centered">Total Results : {data.totalResults || 0}</h1>}
                     <div className="row">
-                        {data.Search.map((movie) =>
+                        {data.Search && data.Search.map((movie) =>
                             <div className="block column" key={movie.imdbID}>
                                 {movie.Poster !== 'N/A' ? <img className="negative-m-poster" src={movie.Poster} alt="movie-poster" /> : <div>Sorry, no image.</div>}
                                 <div className="block-item">
@@ -43,28 +69,9 @@ const GetMovies = () => {
                                 </div>
                             </div>
                         )}
-                </div>
-            </div>
-            : data.Error === "Movie not found!" ? <div className="centered mt">There doesn't seem to be a movie with this title.</div>
-                : data.Error === "Something went wrong." && !handleSubmit ? <div className="centered mt">Something went wrong.</div>
-                    : data.Error === "Too many results." ? <div className="centered mt">Too many results. OMDB can't fetch.</div>
-                        : <div className="centered mt">Search for a title.</div>
-    }
-
-    return (
-        <div>
-            <form className="centered">
-                <div className="error">{error}</div>
-                <input
-                    className="form-input"
-                    type="text"
-                    placeholder="Search OMBD Database"
-                    value={query}
-                    onChange={handleChange}
-                />
-                <button className="mt" onClick={handleSubmit}>Search</button>
-            </form>
-            {check()}
+                        {data.Response && data.Error === 'Movie not found!' && <div>Sorry, there are no movies with that title.</div>}
+                    </div>
+                </div>}
         </div>
     );
 }

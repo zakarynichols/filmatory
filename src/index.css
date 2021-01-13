@@ -7,7 +7,7 @@ body {
   margin-left:  auto;
   font-family: 'Cairo', sans-serif;
   background-color: rgb(241, 241, 241);
-  background: rgb(231, 231, 231); 
+  background: #e7e7e7; 
    /* linear-gradient(
      to right, 
     rgb(255, 255, 255), rgb(221, 221, 221)
@@ -242,7 +242,7 @@ button:focus {
   color: white;
   
   /* Background styles */
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url('https://cdn.pixabay.com/photo/2019/05/25/18/58/movie-4228888_960_720.png');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.75),rgba(0, 0, 0, 0.5)), url('https://cdn.pixabay.com/photo/2019/05/25/18/58/movie-4228888_960_720.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
